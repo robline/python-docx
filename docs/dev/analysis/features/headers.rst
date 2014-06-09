@@ -34,6 +34,7 @@ If you create a default document and save it (let's call that test.docx), then a
 2) A new relationship is specified at word/_rels/document.xml.rels:
 
 ::
+
     <?xml version="1.0" encoding="UTF-8"?>
     <Relationships xmlns="http://schemas.openxmlformats.org/package/2006/relationships">
     <Relationship Id="rId1" Type="http://schemas.openxmlformats.org/officeDocument/2006/relationships/styles" Target="styles.xml" />
@@ -46,6 +47,7 @@ If you create a default document and save it (let's call that test.docx), then a
 3) Within the <w:sectPr> element of document.xml, there will be a new element called headerReference:
 
 ::
+
     <w:sectPr>
         *<w:headerReference w:type="default" r:id="rId2"/>*
         <w:type w:val="nextPage"/>
@@ -57,6 +59,7 @@ Structure of header1.xml
 ------------------------
 
 ::
+
     <?xml version="1.0" encoding="UTF-8"?>
     <w:hdr xmlns:w="http://schemas.openxmlformats.org/wordprocessingml/2006/main" 
         xmlns:o="urn:schemas-microsoft-com:office:office" 
@@ -123,6 +126,7 @@ specified with the start attribute on the pgNumType element). If the val attribu
 in a section shall use the odd page header.
 
 ::
+
     <w:hdr>
         <w:p>
             <w:r>
@@ -134,6 +138,7 @@ in a section shall use the odd page header.
 Even page header part:
 
 ::
+
     <w:hdr>
         <w:p>
             <w:r>
@@ -145,6 +150,7 @@ Even page header part:
 Odd page header part:
 
 ::
+
     <w:hdr>
         <w:p>
             <w:r>
