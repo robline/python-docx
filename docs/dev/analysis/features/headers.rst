@@ -21,17 +21,19 @@ shall appear on all even numbered pages in a given section.
 Differences between a document without and with a header
 --------------------------------------------------------
 
-If you create a default document and save it (let's call that test.docx), then add a header to it like so:
+If you create a default document and save it (let's call that test.docx), then add a header to it like so...
 
     This is a header.   x of xx
     
-the following changes will occur in the package:
+...the following changes will occur in the package:
 
 1) A part called header1.xml will be added to the package with the following pathname:
+
     /word/header1.xml
 
 2) A new relationship is specified at word/_rels/document.xml.rels:
 
+::
     <?xml version="1.0" encoding="UTF-8"?>
     <Relationships xmlns="http://schemas.openxmlformats.org/package/2006/relationships">
     <Relationship Id="rId1" Type="http://schemas.openxmlformats.org/officeDocument/2006/relationships/styles" Target="styles.xml" />
@@ -43,6 +45,7 @@ the following changes will occur in the package:
 
 3) Within the <w:sectPr> element of document.xml, there will be a new element called headerReference:
 
+::
     <w:sectPr>
         *<w:headerReference w:type="default" r:id="rId2"/>*
         <w:type w:val="nextPage"/>
@@ -53,6 +56,7 @@ the following changes will occur in the package:
 Structure of header1.xml
 ------------------------
 
+::
     <?xml version="1.0" encoding="UTF-8"?>
     <w:hdr xmlns:w="http://schemas.openxmlformats.org/wordprocessingml/2006/main" 
         xmlns:o="urn:schemas-microsoft-com:office:office" 
@@ -118,6 +122,7 @@ from the starting value of page numbering for the parent section to determine if
 specified with the start attribute on the pgNumType element). If the val attribute is set to False, then all pages
 in a section shall use the odd page header.
 
+::
     <w:hdr>
         <w:p>
             <w:r>
@@ -128,6 +133,7 @@ in a section shall use the odd page header.
     
 Even page header part:
 
+::
     <w:hdr>
         <w:p>
             <w:r>
@@ -138,6 +144,7 @@ Even page header part:
     
 Odd page header part:
 
+::
     <w:hdr>
         <w:p>
             <w:r>
