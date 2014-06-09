@@ -22,85 +22,90 @@ Differences between a document without and with a header
 --------------------------------------------------------
 
 If you create a default document and save it (let's call that test.docx), then add a header to it like so:
-This is a header.   x of xx
+
+    This is a header.   x of xx
+    
 the following changes will occur in the package:
 
 1) A part called header1.xml will be added to the package with the following pathname:
     /word/header1.xml
 
 2) A new relationship is specified at word/_rels/document.xml.rels:
-<?xml version="1.0" encoding="UTF-8"?>
-<Relationships xmlns="http://schemas.openxmlformats.org/package/2006/relationships">
-   <Relationship Id="rId1" Type="http://schemas.openxmlformats.org/officeDocument/2006/relationships/styles" Target="styles.xml" />
-   *<Relationship Id="rId2" Type="http://schemas.openxmlformats.org/officeDocument/2006/relationships/header" Target="header1.xml" />*
-   <Relationship Id="rId3" Type="http://schemas.openxmlformats.org/officeDocument/2006/relationships/numbering" Target="numbering.xml" />
-   ...
-   <Relationship Id="rId7" Type="http://schemas.openxmlformats.org/officeDocument/2006/relationships/customXml" Target="../customXml/item1.xml" />
-</Relationships>
+
+    <?xml version="1.0" encoding="UTF-8"?>
+    <Relationships xmlns="http://schemas.openxmlformats.org/package/2006/relationships">
+    <Relationship Id="rId1" Type="http://schemas.openxmlformats.org/officeDocument/2006/relationships/styles" Target="styles.xml" />
+    *<Relationship Id="rId2" Type="http://schemas.openxmlformats.org/officeDocument/2006/relationships/header" Target="header1.xml" />*
+    <Relationship Id="rId3" Type="http://schemas.openxmlformats.org/officeDocument/2006/relationships/numbering" Target="numbering.xml" />
+    ...
+    <Relationship Id="rId7" Type="http://schemas.openxmlformats.org/officeDocument/2006/relationships/customXml" Target="../customXml/item1.xml" />
+    </Relationships>
 
 3) Within the <w:sectPr> element of document.xml, there will be a new element called headerReference:
-<w:sectPr>
-    *<w:headerReference w:type="default" r:id="rId2"/>*
-    <w:type w:val="nextPage"/>
-    <w:pgSz w:w="12240" w:h="15840"/>
-    ...
-</w:sectPr>
+
+    <w:sectPr>
+        *<w:headerReference w:type="default" r:id="rId2"/>*
+        <w:type w:val="nextPage"/>
+        <w:pgSz w:w="12240" w:h="15840"/>
+        ...
+    </w:sectPr>
 
 Structure of header1.xml
 ------------------------
-<?xml version="1.0" encoding="UTF-8"?>
-<w:hdr xmlns:w="http://schemas.openxmlformats.org/wordprocessingml/2006/main" 
-       xmlns:o="urn:schemas-microsoft-com:office:office" 
-       xmlns:r="http://schemas.openxmlformats.org/officeDocument/2006/relationships" 
-       xmlns:v="urn:schemas-microsoft-com:vml" xmlns:w10="urn:schemas-microsoft-com:office:word" 
-       xmlns:wp="http://schemas.openxmlformats.org/drawingml/2006/wordprocessingDrawing">
-   <w:p>
-      <w:pPr>
-         <w:pStyle w:val="Header" />
-         <w:rPr />
-      </w:pPr>
-      <w:r>
-         <w:rPr />
-         <w:t xml:space="preserve">This is a header.  </w:t>
-      </w:r>
-      <w:r>
-         <w:rPr />
-         <w:fldChar w:fldCharType="begin" />
-      </w:r>
-      <w:r>
-         <w:instrText>PAGE</w:instrText>
-      </w:r>
-      <w:r>
-         <w:fldChar w:fldCharType="separate" />
-      </w:r>
-      <w:r>
-         <w:t>1</w:t>
-      </w:r>
-      <w:r>
-         <w:fldChar w:fldCharType="end" />
-      </w:r>
-      <w:r>
-         <w:rPr />
-         <w:t xml:space="preserve"> of </w:t>
-      </w:r>
-      <w:r>
-         <w:rPr />
-         <w:fldChar w:fldCharType="begin" />
-      </w:r>
-      <w:r>
-         <w:instrText>NUMPAGES</w:instrText>
-      </w:r>
-      <w:r>
-         <w:fldChar w:fldCharType="separate" />
-      </w:r>
-      <w:r>
-         <w:t>1</w:t>
-      </w:r>
-      <w:r>
-         <w:fldChar w:fldCharType="end" />
-      </w:r>
-   </w:p>
-</w:hdr>
+
+    <?xml version="1.0" encoding="UTF-8"?>
+    <w:hdr xmlns:w="http://schemas.openxmlformats.org/wordprocessingml/2006/main" 
+        xmlns:o="urn:schemas-microsoft-com:office:office" 
+        xmlns:r="http://schemas.openxmlformats.org/officeDocument/2006/relationships" 
+        xmlns:v="urn:schemas-microsoft-com:vml" xmlns:w10="urn:schemas-microsoft-com:office:word" 
+        xmlns:wp="http://schemas.openxmlformats.org/drawingml/2006/wordprocessingDrawing">
+    <w:p>
+        <w:pPr>
+            <w:pStyle w:val="Header" />
+            <w:rPr />
+        </w:pPr>
+        <w:r>
+            <w:rPr />
+            <w:t xml:space="preserve">This is a header.  </w:t>
+        </w:r>
+        <w:r>
+            <w:rPr />
+            <w:fldChar w:fldCharType="begin" />
+        </w:r>
+        <w:r>
+            <w:instrText>PAGE</w:instrText>
+        </w:r>
+        <w:r>
+            <w:fldChar w:fldCharType="separate" />
+        </w:r>
+        <w:r>
+            <w:t>1</w:t>
+        </w:r>
+        <w:r>
+            <w:fldChar w:fldCharType="end" />
+        </w:r>
+        <w:r>
+            <w:rPr />
+            <w:t xml:space="preserve"> of </w:t>
+        </w:r>
+        <w:r>
+            <w:rPr />
+            <w:fldChar w:fldCharType="begin" />
+        </w:r>
+        <w:r>
+            <w:instrText>NUMPAGES</w:instrText>
+        </w:r>
+        <w:r>
+            <w:fldChar w:fldCharType="separate" />
+        </w:r>
+        <w:r>
+            <w:t>1</w:t>
+        </w:r>
+        <w:r>
+            <w:fldChar w:fldCharType="end" />
+        </w:r>
+    </w:p>
+    </w:hdr>
 
 Different Even/Odd Page Headers and Footers
 -------------------------------------------
@@ -144,6 +149,7 @@ Odd page header part:
 
 Candidate protocol -- document.add_header()
 -------------------------------------
+
 Pending...
 
 
