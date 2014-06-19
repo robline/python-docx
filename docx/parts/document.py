@@ -15,6 +15,7 @@ from ..oxml.shared import nsmap, oxml_fromstring
 from ..shape import InlineShape
 from ..shared import lazyproperty, Parented
 from ..table import Table
+from ..section import Section
 from ..text import Paragraph
 
 
@@ -88,7 +89,7 @@ class DocumentPart(Part):
         """
         id_str_lst = self._element.xpath('//@id')
         used_ids = [int(id_str) for id_str in id_str_lst if id_str.isdigit()]
-        for n in range(1, len(used_ids)+2):
+        for n in range(1, len(used_ids) + 2):
             if n not in used_ids:
                 return n
 
@@ -118,6 +119,15 @@ class DocumentPart(Part):
         such as ``<w:ins>`` or ``<w:del>`` do not appear in this list.
         """
         return self.body.tables
+
+    @property
+    def sections(self):
+        """
+        A list of |Section| instances corresponding to the tables in the
+        document, in document order. Note that sections within revision marks
+        such as ``<w:ins>`` or ``<w:del>`` do not appear in this list.
+        """
+        return self.body.sections
 
 
 class _Body(object):
@@ -169,6 +179,14 @@ class _Body(object):
         they appear.
         """
         return [Table(tbl) for tbl in self._body.tbl_lst]
+
+    @property
+    def sections(self):
+        """
+        A sequence containing all the sections in the document, in the order
+        they appear.
+        """
+        return [Section(sect) for sect in self._body.sect_lst]
 
 
 class InlineShapes(Parented):

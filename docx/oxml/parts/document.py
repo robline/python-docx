@@ -66,6 +66,14 @@ class CT_Body(OxmlBaseElement):
         """
         return self.findall(qn('w:tbl'))
 
+    @property
+    def sect_lst(self):
+        """
+        [ROB]
+        List of <w:sectPr> child elements.
+        """
+        return self.findall(qn('w:sectPr'))
+
     def _append_blocklevelelt(self, block_level_elt):
         """
         Return *block_level_elt* after appending it to end of
