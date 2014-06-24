@@ -39,6 +39,7 @@ class HeaderPart(Part):
         Return newly created empty header part, containing only the root
         ``<w:hdr>`` element.
         """
+        # call oxml class method CT_Header.new()
         raise NotImplementedError
 
     @lazyproperty
