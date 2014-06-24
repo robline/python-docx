@@ -16,6 +16,7 @@ from docx.opc.constants import CONTENT_TYPE as CT, RELATIONSHIP_TYPE as RT
 from docx.package import Package
 from docx.parts.numbering import NumberingPart
 from docx.parts.styles import StylesPart
+from docx.parts.header import HeaderPart
 from docx.shared import lazyproperty
 
 
@@ -176,6 +177,22 @@ class Document(object):
             styles_part = StylesPart.new()
             self._document_part.relate_to(styles_part, RT.STYLES)
             return styles_part
+
+        @lazyproperty
+    def header_part(self, section=None):
+        """
+        Instance of |HeaderPart| for this document. Takes a section argument.
+        If none is passed, assumes default (sentinel) Section.
+        Creates an empty header part if one is not present.
+        """
+        if not section:
+            section = self.sections()[0]
+        try:
+            return self._document_part.part_related_by(RT.HEADER)
+        except KeyError:
+            header_part = HeaderPart.new()
+            self._document_part.relate_to(header_part, RT.HEADER)
+            return header_part
 
     @property
     def tables(self):
